@@ -12,6 +12,7 @@
 #include "bat/ads/ad_info.h"
 #include "bat/ads/ad_notification_info.h"
 #include "bat/ads/ads_client.h"
+#include "bat/ads/brave_today_ad_info.h"
 #include "bat/ads/confirmation_type.h"
 #include "bat/ads/internal/account/account.h"
 #include "bat/ads/internal/account/confirmations/confirmations_state.h"
@@ -31,6 +32,7 @@
 #include "bat/ads/internal/ad_transfer/ad_transfer.h"
 #include "bat/ads/internal/ads/ad_notifications/ad_notification.h"
 #include "bat/ads/internal/ads/ad_notifications/ad_notifications.h"
+#include "bat/ads/internal/ads/brave_today_ads/brave_today_ad.h"
 #include "bat/ads/internal/ads/new_tab_page_ads/new_tab_page_ad.h"
 #include "bat/ads/internal/ads_client_helper.h"
 #include "bat/ads/internal/ads_history/ads_history.h"
@@ -71,6 +73,7 @@ AdsImpl::~AdsImpl() {
   ad_notification_->RemoveObserver(this);
   ad_server_->RemoveObserver(this);
   ad_transfer_->RemoveObserver(this);
+  brave_today_ad_->RemoveObserver(this);
   conversions_->RemoveObserver(this);
   new_tab_page_ad_->RemoveObserver(this);
 }
@@ -269,10 +272,17 @@ void AdsImpl::OnAdNotificationEvent(
 }
 
 void AdsImpl::OnNewTabPageAdEvent(
-    const std::string& wallpaper_id,
+    const std::string& uuid,
     const std::string& creative_instance_id,
     const NewTabPageAdEventType event_type) {
-  new_tab_page_ad_->FireEvent(wallpaper_id, creative_instance_id, event_type);
+  new_tab_page_ad_->FireEvent(uuid, creative_instance_id, event_type);
+}
+
+void AdsImpl::OnBraveTodayAdEvent(
+    const std::string& uuid,
+    const std::string& creative_instance_id,
+    const BraveTodayAdEventType event_type) {
+  brave_today_ad_->FireEvent(uuid, creative_instance_id, event_type);
 }
 
 void AdsImpl::RemoveAllHistory(
@@ -414,6 +424,9 @@ void AdsImpl::set(
 
   ad_transfer_ = std::make_unique<AdTransfer>();
   ad_transfer_->AddObserver(this);
+
+  brave_today_ad_ = std::make_unique<BraveTodayAd>();
+  brave_today_ad_->AddObserver(this);
 
   client_ = std::make_unique<Client>();
 

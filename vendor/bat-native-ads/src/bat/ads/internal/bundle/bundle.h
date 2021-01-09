@@ -7,6 +7,7 @@
 #define BAT_ADS_INTERNAL_BUNDLE_BUNDLE_H_
 
 #include "bat/ads/internal/bundle/creative_ad_notification_info.h"
+#include "bat/ads/internal/bundle/creative_brave_today_ad_info.h"
 #include "bat/ads/internal/bundle/creative_new_tab_page_ad_info.h"
 #include "bat/ads/internal/conversions/conversion_info.h"
 
@@ -30,19 +31,23 @@ class Bundle {
 
   void DeleteDatabaseTables();
 
-  void DeleteCreativeAdNotifications();
-  void DeleteCreativeNewTabPageAds();
   void DeleteCampaigns();
   void DeleteSegments();
   void DeleteCreativeAds();
   void DeleteDayparts();
   void DeleteGeoTargets();
 
+  void DeleteCreativeAdNotifications();
   void SaveCreativeAdNotifications(
       const CreativeAdNotificationList& creative_ad_notifications);
 
+  void DeleteCreativeNewTabPageAds();
   void SaveCreativeNewTabPageAds(
       const CreativeNewTabPageAdList& creative_new_tab_page_ads);
+
+  void DeleteCreativeBraveTodayAds();
+  void SaveCreativeBraveTodayAds(
+      const CreativeBraveTodayAdList& creative_brave_today_ads);
 
   void PurgeExpiredConversions();
   void SaveConversions(

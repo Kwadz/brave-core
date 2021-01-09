@@ -16,6 +16,7 @@
 #include "bat/ads/ad_notification_info.h"
 #include "bat/ads/ads_client.h"
 #include "bat/ads/ads_history_info.h"
+#include "bat/ads/brave_today_ad_info.h"
 #include "bat/ads/category_content_info.h"
 #include "bat/ads/export.h"
 #include "bat/ads/mojom.h"
@@ -163,9 +164,15 @@ class ADS_EXPORT Ads {
 
   // Should be called when a user views or clicks a new tab page ad
   virtual void OnNewTabPageAdEvent(
-      const std::string& wallpaper_id,
+      const std::string& uuid,
       const std::string& creative_instance_id,
       const NewTabPageAdEventType event_type) = 0;
+
+  // Should be called when a user views or clicks a Brave Today ad
+  virtual void OnBraveTodayAdEvent(
+      const std::string& uuid,
+      const std::string& creative_instance_id,
+      const BraveTodayAdEventType event_type) = 0;
 
   // Should be called to remove all cached history. The callback takes one
   // argument — |Result| should be set to |SUCCESS| if successful otherwise

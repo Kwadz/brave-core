@@ -115,9 +115,14 @@ class AdsService : public KeyedService {
       const std::string& id) = 0;
 
   virtual void OnNewTabPageAdEvent(
-      const std::string& wallpaper_id,
+      const std::string& uuid,
       const std::string& creative_instance_id,
       const ads::mojom::BraveAdsNewTabPageAdEventType event_type) = 0;
+
+  virtual void OnBraveTodayAdEvent(
+      const std::string& uuid,
+      const std::string& creative_instance_id,
+      const ads::mojom::BraveAdsBraveTodayAdEventType event_type) = 0;
 
   virtual void ReconcileAdRewards() = 0;
 

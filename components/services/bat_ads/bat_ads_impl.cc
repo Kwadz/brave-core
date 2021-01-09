@@ -132,10 +132,17 @@ void BatAdsImpl::OnAdNotificationEvent(
 }
 
 void BatAdsImpl::OnNewTabPageAdEvent(
-    const std::string& wallpaper_id,
+    const std::string& uuid,
     const std::string& creative_instance_id,
     const ads::NewTabPageAdEventType event_type) {
-  ads_->OnNewTabPageAdEvent(wallpaper_id, creative_instance_id, event_type);
+  ads_->OnNewTabPageAdEvent(uuid, creative_instance_id, event_type);
+}
+
+void BatAdsImpl::OnBraveTodayAdEvent(
+    const std::string& uuid,
+    const std::string& creative_instance_id,
+    const ads::BraveTodayAdEventType event_type) {
+  ads_->OnBraveTodayAdEvent(uuid, creative_instance_id, event_type);
 }
 
 void BatAdsImpl::RemoveAllHistory(

@@ -14,9 +14,14 @@ typedef NS_ENUM(NSInteger, BATAdNotificationEventType) {
 } NS_SWIFT_NAME(AdNotificationEventType);
 
 typedef NS_ENUM(NSInteger, BATNewTabPageAdEventType) {
-  BATNewTabPageAdEventTypeViewed,       // = ads::AdNotificationEventType::kViewed
-  BATNewTabPageAdEventTypeClicked       // = ads::AdNotificationEventType::kClicked
+  BATNewTabPageAdEventTypeViewed,       // = ads::NewTabPageAdEventType::kViewed
+  BATNewTabPageAdEventTypeClicked       // = ads::NewTabPageAdEventType::kClicked
 } NS_SWIFT_NAME(NewTabPageAdEventType);
+
+typedef NS_ENUM(NSInteger, BATBraveTodayAdEventType) {
+  BATBraveTodayAdEventTypeViewed,       // = ads::BraveTodayAdEventType::kViewed
+  BATBraveTodayAdEventTypeClicked       // = ads::BraveTodayAdEventType::kClicked
+} NS_SWIFT_NAME(BraveTodayAdEventType);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -140,6 +145,11 @@ NS_SWIFT_NAME(BraveAds)
 - (void)reportNewTabPageAdEvent:(NSString *)wallpaperId
              creativeInstanceId:(NSString *)creativeInstanceId
                       eventType:(BATNewTabPageAdEventType)eventType;
+
+/// Report that a Brave Today ad event type was triggered for a given id
+- (void)reportBraveTodayAdEvent:(NSString *)uuid
+             creativeInstanceId:(NSString *)creativeInstanceId
+                      eventType:(BATBraveTodayAdEventType)eventType;
 
 /// Reconcile ad rewards with server
 - (void)reconcileAdRewards;
