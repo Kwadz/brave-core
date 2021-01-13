@@ -1,5 +1,5 @@
 diff --git a/chrome/browser/resources/settings/privacy_page/privacy_page.html b/chrome/browser/resources/settings/privacy_page/privacy_page.html
-index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773909a1f30 100644
+index 8dbac3f62cacbcec57340ed728acbe41ba93e4b3..505295340707be68f435c13732de3a261ac310bb 100644
 --- a/chrome/browser/resources/settings/privacy_page/privacy_page.html
 +++ b/chrome/browser/resources/settings/privacy_page/privacy_page.html
 @@ -29,6 +29,7 @@
@@ -8,9 +8,9 @@ index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773
        <div route-path="default">
 +        <settings-personalization-options prefs="{{prefs}}"></settings-personalization-options>
          <cr-link-row id="clearBrowsingData"
-             class="hr" start-icon="cr:delete"
+             start-icon="cr:delete"
              label="$i18n{clearBrowsingData}"
-@@ -144,6 +145,7 @@
+@@ -152,6 +153,7 @@
            </template>
          </settings-subpage>
        </template>
@@ -18,7 +18,7 @@ index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773
        <template is="dom-if" route-path="/content/backgroundSync" no-search>
          <settings-subpage page-title="$i18n{siteSettingsBackgroundSync}"
              search-label="$i18n{siteSettingsAllSitesSearch}"
-@@ -185,6 +187,7 @@
+@@ -193,6 +195,7 @@
            </template>
          </settings-subpage>
        </template>
@@ -26,7 +26,7 @@ index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773
        <template is="dom-if" route-path="/content/camera" no-search>
          <settings-subpage page-title="$i18n{siteSettingsCategoryCamera}"
              search-label="$i18n{siteSettingsAllSitesSearch}"
-@@ -402,6 +405,7 @@
+@@ -410,6 +413,7 @@
              </category-setting-exceptions>
            </template>
            <template is="dom-if" if="[[!enableContentSettingsRedesign_]]">
@@ -34,7 +34,7 @@ index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773
              <category-default-setting
                  toggle-off-label="$i18n{siteSettingsBlocked}"
                  toggle-on-label="$i18n{siteSettingsAllowedRecommended}"
-@@ -413,6 +417,7 @@
+@@ -421,6 +425,7 @@
                  allow-header="$i18n{siteSettingsAllow}"
                  search-filter="[[searchFilter_]]">
              </category-setting-exceptions>
@@ -42,7 +42,7 @@ index 5db3d9b229ccf62f754c3671ab7eeabcfe7eede4..cc5d2ab84daf4f376753ae22ecbc2773
            </template>
          </settings-subpage>
        </template>
-@@ -706,6 +711,19 @@
+@@ -714,6 +719,19 @@
            </settings-subpage>
         </template>
       </template>
