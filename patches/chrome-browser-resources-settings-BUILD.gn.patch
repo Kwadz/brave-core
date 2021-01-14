@@ -1,8 +1,8 @@
 diff --git a/chrome/browser/resources/settings/BUILD.gn b/chrome/browser/resources/settings/BUILD.gn
-index 344fc64ce72cb5008cf9611f898db3f6c3d73740..84ad02d4e054be176451e21b5d513a673d820c0f 100644
+index 13445757b2bebcbcec9da49d9ccbd345b524510e..5e4e773d07041597d1d115d54e68adaa07c2a33b 100644
 --- a/chrome/browser/resources/settings/BUILD.gn
 +++ b/chrome/browser/resources/settings/BUILD.gn
-@@ -91,6 +91,7 @@ generate_grd("build_grd") {
+@@ -93,6 +93,7 @@ generate_grd("build_grd") {
        "$target_gen_dir/$preprocess_gen_manifest",
      ]
    }
