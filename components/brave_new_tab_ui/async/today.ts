@@ -57,7 +57,16 @@ handler.on(Actions.ensureSettingsData.getType(), async (store) => {
 handler.on<Actions.ReadFeedItemPayload>(Actions.readFeedItem.getType(), async (store, payload) => {
   const state = store.getState() as ApplicationState
   const todayPageIndex = state.today.currentPageIndex
-  chrome.send('todayOnCardVisits', [state.today.cardsVisited])
+  let creativeId = ''
+  if (payload.isPromoted) {
+    creativeId = (payload.item as BraveToday.PromotedArticle).creative_instance_id
+  }
+  chrome.send('todayOnCardVisit', [
+    state.today.cardsVisited,
+    payload.item.url_hash,
+    creativeId,
+    payload.isPromoted
+  ])
   if (!payload.openInNewTab) {
     // remember article so we can scroll to it on "back" navigation
     // TODO(petemill): Type this history.state data and put in an API module
@@ -73,6 +82,13 @@ handler.on<Actions.ReadFeedItemPayload>(Actions.readFeedItem.getType(), async (s
   } else {
     window.open(payload.item.url, '_blank')
   }
+})
+
+handler.on<BraveToday.PromotedArticle>(Actions.promotedItemViewed.getType(), async (store, item) => {
+  chrome.send('braveTodayOnPromotedCardView', [
+    item.creative_instance_id,
+    item.url_hash
+  ])
 })
 
 handler.on<number>(Actions.feedItemViewedCountChanged.getType(), async (store, payload) => {

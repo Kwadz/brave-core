@@ -46,7 +46,9 @@ const LargeArticle = React.forwardRef<HTMLElement, ArticleProps>(function (props
   const { publisher, item } = props
   const [cardRef] = useScrollIntoView(props.shouldScrollIntoView || false)
 
-  const onClick = useReadArticleClickHandler(props.onReadFeedItem, item)
+  const onClick = useReadArticleClickHandler(props.onReadFeedItem, { item, isPromoted: props.isPromoted })
+
+  // TODO(petemill): if promoted, detect when card is viewed, and send an action
 
   // TODO(petemill): Avoid nested links
   // `ref as any` due to https://github.com/DefinitelyTyped/DefinitelyTyped/issues/28884
