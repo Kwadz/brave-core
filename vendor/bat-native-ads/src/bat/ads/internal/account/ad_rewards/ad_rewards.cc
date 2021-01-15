@@ -190,7 +190,7 @@ void AdRewards::SetUnreconciledTransactions(
   const int64_t to_timestamp =
       static_cast<int64_t>(base::Time::Now().ToDoubleT());
 
-  unreconciled_estimated_pending_rewards_ = CalculateEarningsForTransactions(
+  unreconciled_estimated_pending_rewards_ += CalculateEarningsForTransactions(
       unreconciled_transactions, 0, to_timestamp);
 
   ConfirmationsState::Get()->Save();
@@ -278,8 +278,17 @@ void AdRewards::OnGetPayments(
     return;
   }
 
+  const double old_balance = payments_->GetBalance();
+
   if (!payments_->SetFromJson(url_response.body)) {
     BLOG(0, "Failed to parse payment balance: " << url_response.body);
+    OnFailedToReconcileAdRewards();
+    return;
+  }
+
+  if (!payments_->DidReconcileBalance(old_balance,
+      unreconciled_estimated_pending_rewards_)) {
+    BLOG(0, "Payment balance is not ready");
     OnFailedToReconcileAdRewards();
     return;
   }
