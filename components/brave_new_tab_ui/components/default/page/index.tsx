@@ -216,7 +216,7 @@ export const GridItemBrandedLogo = styled(GridItemCredits)`
   --ntp-grid-item-credits-bottom-margin-wide: -8px;
   --ntp-grid-item-credits-left-margin-wide: 22px;
   
-  @media screen and (min-width: ${breakpointEveryBlock + 1}) {
+  @media screen and (min-width: ${breakpointEveryBlock}) {
     position: fixed;
     bottom: 0;
     left: 0;
